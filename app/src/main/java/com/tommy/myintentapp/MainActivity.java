@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView hasil;
     Button getBtnMoveObject;
     Button btncall;
+    Button btnresult;
+    TextView datareceived;
+
+    private int REQUEST_CODE = 100 ;
 
 
     @Override
@@ -41,6 +45,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btncall = findViewById(R.id.btn_call);
         btncall.setOnClickListener(this);
+
+        btnresult = findViewById(R.id.btn_result);
+        btnresult.setOnClickListener(this);
+
+        datareceived = findViewById(R.id.data_received);
+
+
+
+
+
     }
 
 
@@ -77,6 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent dialPhone  = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phone));
                 startActivity(dialPhone);
                 break;
+
+            case R.id.btn_result:
+                Intent moveForResultIntent = new Intent(MainActivity.this, MoveForResultView.class);
+                startActivityForResult(moveForResultIntent, REQUEST_CODE);
+                break;
         }
     }
 
@@ -86,5 +105,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void pengurangan(int a, int b){
         hasil.setText(String.valueOf(a-b));
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == MoveForResultView.RESULT_CODE) {
+                int selectedValue = data.getIntExtra(MoveForResultView.EXTRA_SELECTED_VALUE, 0);
+                datareceived.setText(String.format("Hasil : %s", selectedValue));
+            }
+        }
     }
 }

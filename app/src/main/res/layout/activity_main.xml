@@ -44,12 +44,24 @@
         android:layout_marginTop="@dimen/margin_vertical"
         android:layout_gravity="center"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_call"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_vertical"
         android:id="@+id/btn_call"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:id="@+id/btn_result"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_vertical"
+        android:id="@+id/data_received"/>
+
+
 
 </LinearLayout>
